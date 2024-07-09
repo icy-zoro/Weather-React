@@ -101,11 +101,13 @@ class WeatherBase {
     }
 
     static UnixUTCToLocalTime(unixUtcTime: number) {
-        const date = new Date(unixUtcTime * 1000);
+        // const date = new Date(unixUtcTime * 1000);
         // const offsetMs = date.getTimezoneOffset() * 60 * 1000;
         // const localDate = new Date(date.getTime() - offsetMs);
         // return localDate;
-        return date;
+        // return date;
+
+        return new Date(unixUtcTime * 1000);
     }
 
     get tempStr(): string {
