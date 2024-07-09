@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import WeatherRequests from "../scripts/requests.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../state/store.ts";
-import {useParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import DefaultSpinner from "./DefaultSpinner.tsx";
 import Forecast from "../scripts/weather/forecast.ts";
 import MainCard from "./cards/MainCard.tsx";
@@ -14,7 +14,8 @@ export default function Home() {
     const units = useSelector((state: RootState) => state.units.value)
     const requests = new WeatherRequests(lang, units)
 
-    const {city} = useParams()
+    const [searchParams] = useSearchParams()
+    const city = searchParams.get('city')
 
     const [forecast, setForecast] = useState<Weather | null>(null)
     const [hourlyForecast, setHourlyForecast] = useState<Forecast | null>(null)

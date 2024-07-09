@@ -66,7 +66,7 @@ class Forecast {
         this.pop = Forecast.mostFrequentElem(this.list.map(x => x.pop));
         this.humidity = Forecast.Avg(this.list.map(x => x.main.humidity));
         this.wind = Forecast.Avg(this.list.map(x => x.wind.speed));
-        this.weatherDescription = Forecast.mostFrequentElem(this.list.map(x => x.weather.description));
+        this.weatherDescription = Forecast.mostFrequentElem(this.list.map(x => x.weather.description))
         this.dtDate = WeatherBase.UnixUTCToLocalTime(this.list[0].dt);
         this.dayOfWeek = Forecast.weekdays[this.dtDate.getDay()];
         this.weatherIcon = Forecast.mostFrequentElem(this.list.map(x => x.weather.icon));
@@ -82,8 +82,8 @@ class Forecast {
         return `${this.temp_min.toFixed(1)}${units}`;
     }
 
-    get popStr(): string {
-        return `${this.pop}%`;
+    get precipitationStr(): string {
+        return `${this.pop * 100}%`;
     }
 
     get humidityStr(): string {

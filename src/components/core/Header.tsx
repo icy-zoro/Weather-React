@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import Language from "../scripts/requests/language.ts";
-import {RootState} from "../state/store.ts";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import Language from "../../scripts/requests/language.ts";
+import {RootState} from "../../state/store.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {setLanguage} from "../state/language.ts";
-import {setUnits} from "../state/units.ts";
+import {setLanguage} from "../../state/language.ts";
+import {setUnits} from "../../state/units.ts";
 
 const Light = () => {
     document.documentElement.classList.remove('dark');
@@ -22,8 +22,12 @@ const handleThemeToggle = () => {
 }
 
 export default function Header() {
-    const [oneDay, setOneDay] = useState(true)
-    const [search, setSearch] = useState("")
+    const path = window.location.pathname
+    const [searchParams] = useSearchParams()
+    const city = searchParams.get('city')
+
+    const [oneDay, setOneDay] = useState(path === "/")
+    const [search, setSearch] = useState(city ?? "")
 
     const storedLang = useSelector((state: RootState) => state.language.value)
     const storedUnits = useSelector((state: RootState) => state.units.value)
@@ -33,18 +37,29 @@ export default function Header() {
 
     const oneDayClick = () => {
         setOneDay(true)
-        navigate("/")
+
+        const root = '/'
+        const path = search.length > 0
+            ? `${root}?city=${search}`
+            : city ? `${root}?city=${city}` : root
+        navigate(path)
     }
 
     const fiveDaysClick = () => {
         setOneDay(false)
-        navigate("/five-days")
+
+        const root = '/five-days'
+        const path = search.length > 0
+            ? `${root}?city=${search}`
+            : city ? `${root}?city=${city}` : root
+        navigate(path)
     }
 
     const handleSearch = () => {
         const root = oneDay ? "/" : "/five-days"
         const path = search.length > 0 ? `${root}?city=${search}` : root
         navigate(path)
+        window.location.reload()
     }
 
     const langChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
