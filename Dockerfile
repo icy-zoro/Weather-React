@@ -7,7 +7,6 @@ ARG VITE_API_KEY
 # Set the environment variable
 
 ENV VITE_API_KEY=$VITE_API_KEY
-ENV NODE_ENV=production
 
 # Set the working directory
 WORKDIR /app
@@ -17,7 +16,7 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
