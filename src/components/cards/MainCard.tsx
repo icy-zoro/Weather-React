@@ -4,12 +4,12 @@ import WeatherBase from '../../scripts/weather/weather_base.ts'
 
 export default function MainCard({weather} : {weather: Weather}) {
     return (
-        <div className='card maincard'>
+        <div className='card main-card'>
             <div className='flex flex-col justify-center'>
                 <p className='text-lg'>Weather in <strong>{weather.name}</strong>, {weather.sys.country}</p>
                 <p className='text-sm'>{weather.dtStr}</p>
                 <div className='flex items-center mt-auto'>
-                    <span className={`weathericon _${weather.weather.icon}`}></span>
+                    <span className={`weather-icon _${weather.weather.icon}`}></span>
                     <span className='degrees'>{weather.tempStr}</span>
                 </div>
             </div>
@@ -18,7 +18,7 @@ export default function MainCard({weather} : {weather: Weather}) {
                     WeatherBase.Capitalize(weather.weather.description)
                 }</p>
                 <p className='text-xl'>Feels like:<strong className='ml-4'>{weather.feelsLikeStr}</strong></p>
-                <div className='cardgrid mt-8'>
+                <div className='card-grid mt-8'>
                     {[
                         { label: 'Sunrise:', value: weather.sunriseStr },
                         { label: 'Sunset:', value: weather.sunsetStr },

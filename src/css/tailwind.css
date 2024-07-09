@@ -64,25 +64,25 @@ header, nav {
     @apply rounded-lg bg-gradient-to-r from-blue-600 to-pink-400 text-opacity-100;
 }
 
-.maincard {
+.main-card {
     @apply
     flex flex-wrap justify-between mt-16
     p-7 flex-col
     lg:px-20 lg:py-14 lg:flex-row;
 }
 
-.smcard {
+.sm-card {
     @apply
     mt-4 flex flex-row items-center justify-between
     px-5 py-3
     sm:px-10 sm:py-7;
 }
 
-.cardgrid {
+.card-grid {
     @apply grid gap-x-3 gap-y-1 text-left;
 }
 
-.selectbtn {
+.select-btn {
     @apply
     rounded-lg px-3 py-2 bg-gradient-to-br from-blue-600 to-blue-400
     hover:from-blue-700 hover:to-blue-500
@@ -92,52 +92,51 @@ header, nav {
     hover:disabled:from-blue-400 hover:disabled:to-blue-300 hover:disabled:text-zinc-200;
 }
 
-.dark .selectbtn {
+.dark .select-btn {
     @apply text-white;
 }
 
-.themeswitchbtn {
+.theme-switch-btn {
     @apply
     text-gray-500 hover:bg-gray-100 rounded-lg p-3 text-sm
     focus:outline-none focus:ring-2 focus:ring-gray-200;
 }
 
-.dark .themeswitchbtn {
+.dark .theme-switch-btn {
     @apply
     text-gray-400 hover:bg-gray-700
     focus:outline-none focus:ring-2 focus:ring-gray-200;
 }
 
-/* TODO: Refactor if needed */
-.smcard .cardgrid, .maincard .cardgrid {
+.sm-card .card-grid, .main-card .card-grid {
     @apply mt-6 grid-cols-1;
 }
 
-.smcard .cardgrid {
+.sm-card .card-grid {
     @apply gap-y-4 self-center;
 }
 
-.maincard .degrees {
+.main-card .degrees {
     @apply ml-4 lg:ml-6 text-7xl font-semibold;
 }
 
-.smcard.degrees {
+.sm-card.degrees {
     @apply mt-4 font-semibold text-3xl lg:text-5xl;
 }
 
-.weathericon {
+.weather-icon {
     @apply mt-4;
 }
 
-.maincard .weathericon {
+.main-card .weather-icon {
     @apply w-28 h-28;
 }
 
-.smcard .weathericon {
+.sm-card .weather-icon {
     @apply w-20 h-20;
 }
 
-.fivedaycard .degrees {
+.five-day-card .degrees {
     @apply ml-4;
 }
 

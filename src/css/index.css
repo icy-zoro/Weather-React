@@ -10,7 +10,7 @@ html {
     }
 }
 
-#logo {
+.logo {
     background: center / contain no-repeat url('../img/logo.png');
     width: 2.5rem;
     height: 2.5rem;
@@ -24,7 +24,7 @@ html {
     width: 40rem;
 }
 
-.weathericon {
+.weather-icon {
     display: inline-block;
     background: center / contain no-repeat;
 }

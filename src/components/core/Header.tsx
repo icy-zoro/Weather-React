@@ -76,7 +76,7 @@ export default function Header() {
         <header>
             <nav className='nav'>
                 <div>
-                    <div id='logo'></div>
+                    <div className='logo'></div>
                     <h1>Weather</h1>
                 </div>
                 <div className='mt-1'>
@@ -99,7 +99,7 @@ export default function Header() {
                                 name='languages'
                                 onChange={langChange}>{
                                 Object.keys(Language).map((lang) =>
-                                    // @ts-expect-error
+                                    // @ts-expect-error - iterating over enum values with a string (but it works)
                                     <option key={lang} value={Language[lang]}>
                                         {lang}
                                     </option>
@@ -111,7 +111,7 @@ export default function Header() {
                             <button
                                 onClick={handleThemeToggle}
                                 type='button'
-                                className='themeswitchbtn'>
+                                className='theme-switch-btn'>
                                 <svg aria-hidden='true' id='theme-dark-icon' className='w-5 h-5' fill='currentColor'
                                      viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
                                     <path d='M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z'></path>
@@ -131,13 +131,13 @@ export default function Header() {
             </nav>
             <nav className='flex mt-10 search'>
                 <button
-                    className='selectbtn'
+                    className='select-btn'
                     disabled={oneDay}
                     onClick={oneDayClick}>
                     One day
                 </button>
                 <button
-                    className='selectbtn mx-2'
+                    className='select-btn mx-2'
                     disabled={!oneDay}
                     onClick={fiveDaysClick}>
                     Five days
@@ -149,7 +149,7 @@ export default function Header() {
                     role='searchbox'/>
                 <button
                     role='search'
-                    className='selectbtn mx-2'
+                    className='select-btn mx-2'
                     onClick={handleSearch}>
                     Search
                 </button>
