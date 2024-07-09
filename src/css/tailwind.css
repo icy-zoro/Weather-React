@@ -33,7 +33,7 @@ li {
 }
 
 select {
-    @apply rounded-lg py-1 px-2 bg-opacity-100 bg-slate-200;
+    @apply rounded-lg ml-2 py-1 px-2 bg-opacity-100 bg-slate-200;
 }
 
 .dark select {
