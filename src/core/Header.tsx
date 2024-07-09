@@ -1,5 +1,10 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Language from "../scripts/requests/language.ts";
+import {RootState} from "../state/store.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {setLanguage} from "../state/language.ts";
+import {setUnits} from "../state/units.ts";
 
 const Light = () => {
     document.documentElement.classList.remove('dark');
@@ -20,6 +25,10 @@ export default function Header() {
     const [oneDay, setOneDay] = useState(true)
     const [search, setSearch] = useState("")
 
+    const storedLang = useSelector((state: RootState) => state.language.value)
+    const storedUnits = useSelector((state: RootState) => state.units.value)
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
 
     const oneDayClick = () => {
@@ -38,6 +47,16 @@ export default function Header() {
         navigate(path)
     }
 
+    const langChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const lang = e.target.value as Language
+        dispatch(setLanguage(lang))
+    }
+
+    const unitsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const units = e.target.value
+        dispatch(setUnits(units))
+    }
+
     return (
         <header>
             <nav className="nav">
@@ -49,7 +68,10 @@ export default function Header() {
                     <ul className="flex items-center">
                         <li>
                             <label htmlFor="units">Temperature units:</label>
-                            <select name="units" id="units">
+                            <select
+                                name="units"
+                                value={storedUnits}
+                                onChange={unitsChange}>
                                 <option value="standard">Standard (K, m/s)</option>
                                 <option value="metric">Metric (°C, m/s)</option>
                                 <option value="imperial">Imperial (°F, m/h)</option>
@@ -57,7 +79,16 @@ export default function Header() {
                         </li>
                         <li>
                             <label htmlFor="languages">Selected language:</label>
-                            <select name="languages"></select>
+                            <select
+                                value={storedLang}
+                                name="languages"
+                                onChange={langChange}>{
+                                Object.keys(Language).map((lang) =>
+                                    <option key={lang} value={Language[lang]}>
+                                        {lang}
+                                    </option>,
+                                )
+                            }</select>
                         </li>
                         <li>
                             {/* Dark mode toggle switch */}
