@@ -24,7 +24,7 @@ COPY . .
 # Build the application
 RUN npm run build
 
-EXPOSE 80
+EXPOSE 8080
 
 # Command to start the Vite preview
-CMD ["npm", "run", "preview"]
+CMD ["npm", "start"]
