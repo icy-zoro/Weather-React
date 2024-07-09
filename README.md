@@ -18,6 +18,7 @@ This React Weather App is a modern, user-friendly application that provides real
 - OpenWeatherMap API
 - Axios for API requests
 - Tailwind for styling
+- Redux for state management
 
 ## Installation
 

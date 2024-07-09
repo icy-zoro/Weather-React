@@ -17,7 +17,7 @@ html {
 }
 
 
-.errorimg {
+.error-img {
     display: block;
     background: center / contain no-repeat url('../img/404.png');
     height: 30rem;
