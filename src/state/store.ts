@@ -20,7 +20,9 @@ const store = configureStore({
         language: persistReducer(languagePersistConfig, languageReducer),
         units: persistReducer(unitsPersistConfig, unitsReducer),
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+    }).concat(thunk),
 })
 
 const persistor = persistStore(store)

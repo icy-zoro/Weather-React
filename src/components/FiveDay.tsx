@@ -14,7 +14,6 @@ export default function FiveDay() {
 
     const [searchParams] = useSearchParams()
     const city = searchParams.get('city')
-    console.log(searchParams)
 
     const [forecast, setForecast] = useState<Forecast[] | null>(null)
 

@@ -32,8 +32,7 @@ class WeatherRequestsWorker {
                         const coords = new Coords(position.coords.latitude, position.coords.longitude)
                         resolve(coords)
                     },
-                    error => {
-                        console.error(error)
+                    () => {
                         toast.error(`Can't get your location`)
                         resolve(WeatherRequestsWorker.stdCoords)
                     },
