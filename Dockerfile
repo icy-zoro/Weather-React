@@ -3,9 +3,11 @@ FROM node:latest
 
 # Define the environment variable
 ARG VITE_API_KEY
+ARG PORT=8080
 
 # Set the environment variable
 
+ENV PORT=$PORT
 ENV VITE_API_KEY=$VITE_API_KEY
 
 # Set the working directory
@@ -24,7 +26,7 @@ COPY . .
 # Build the application
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE $PORT
 
 # Command to start the Vite preview
 CMD ["npm", "start"]
