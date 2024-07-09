@@ -5,6 +5,9 @@ import {useSelector} from "react-redux";
 import {RootState} from "../state/store.ts";
 import {useParams} from "react-router-dom";
 import DefaultSpinner from "./DefaultSpinner.tsx";
+import Forecast from "../scripts/weather/forecast.ts";
+import MainCard from "./cards/MainCard.tsx";
+import HourlyCards from "./cards/HourlyCards.tsx";
 
 export default function Home() {
     const lang = useSelector((state: RootState) => state.language.value)
@@ -14,12 +17,26 @@ export default function Home() {
     const {city} = useParams()
 
     const [forecast, setForecast] = useState<Weather | null>(null)
+    const [hourlyForecast, setHourlyForecast] = useState<Forecast | null>(null)
 
     useEffect(() => {
-        requests.getWeather(city).then(setForecast)
+        requests.getWeather(city).then((x) => {
+            x.units = units
+            setForecast(x)
+        })
+        requests.getHourlyWeather(city).then((x) => {
+            x.list.forEach((y) => y.units = units)
+            setHourlyForecast(x)
+        })
     }, []);
 
-    if (!forecast) return <DefaultSpinner/>
+    if (!forecast || !hourlyForecast) return <DefaultSpinner/>
 
-    return <></>
+    return (
+        <div className="home">
+            <MainCard weather={forecast}/>
+            <h2>Hourly forecast</h2>
+            <HourlyCards weather={hourlyForecast}/>
+        </div>
+    )
 }

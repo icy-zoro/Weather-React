@@ -2,6 +2,18 @@ import WeatherBase from "./weather_base.ts";
 import HourlyForecast from "./hourly_forecast.ts";
 import Degrees from "./degrees.ts";
 import Speed from "./speed.ts";
+import Coords from "../coords.ts";
+
+interface CityApi {
+    id: number;
+    name: string;
+    coord: Coords;
+    country: string;
+    population: number;
+    timezone: number;
+    sunrise: number;
+    sunset: number;
+}
 
 class Forecast {
     private static weekdays = [
@@ -11,7 +23,7 @@ class Forecast {
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday"
+        "Saturday",
     ];
 
     static readonly dailyHRForecasts = 8
@@ -29,6 +41,8 @@ class Forecast {
 
     public readonly list: HourlyForecast[];
     public readonly units: "standard" | "metric" | "imperial";
+    public readonly city: CityApi;
+
     public readonly temp_max: number;
     public readonly temp_min: number;
     public readonly pop: number;
@@ -39,11 +53,13 @@ class Forecast {
     public readonly dayOfWeek: string;
     public readonly weatherIcon: string;
 
-    constructor(
+    constructor({list, city, units = 'standard'}: {
         list: HourlyForecast[],
-        units: "standard" | "metric" | "imperial" = 'standard'
-    ) {
+        city: CityApi,
+        units: "standard" | "metric" | "imperial"
+    }) {
         this.list = list
+        this.city = city;
         this.units = units;
         this.temp_max = Math.max(...this.list.map(x => x.main.temp_max))
         this.temp_min = Math.min(...this.list.map(x => x.main.temp_min));

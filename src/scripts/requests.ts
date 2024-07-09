@@ -4,6 +4,7 @@ import {toast} from "react-toastify";
 import weatherCommon from "./requests/axios.ts";
 import Weather from "./weather/weather.ts";
 import Forecast from "./weather/forecast.ts";
+import HourlyForecast from "./weather/hourly_forecast.ts";
 
 class WeatherRequests {
     private static readonly stdCoords = new Coords(49.842957, 24.031111);
@@ -48,27 +49,31 @@ class WeatherRequests {
         const coords = await this.coords()
         const urlCoords = city ? `q=${city}` : `lat=${coords.lat}&lon=${coords.lon}`
 
-        return (await weatherCommon.get(`weather?${urlCoords}`,
+        return new Weather((await weatherCommon.get(`weather?${urlCoords}`,
             {
                 params: {
                     units: this.units,
                     lang: this.lang,
                 },
             },
-        )).data as Weather
+        )).data)
     }
 
     public async getHourlyWeather(city: string | null = null) {
         const coords = await this.coords()
         const urlCoords = city ? `q=${city}` : `lat=${coords.lat}&lon=${coords.lon}`
-
-        return (await weatherCommon.get(`forecast?${urlCoords}`, {
+        const forecast = new Forecast((await weatherCommon.get(`forecast?${urlCoords}`, {
                 params: {
                     units: this.units,
                     lang: this.lang,
                 },
             },
-        )).data as Forecast
+        )).data)
+
+        return {
+            ...forecast,
+            list: forecast.list.map((x: any) => new HourlyForecast(x))
+        } as Forecast
     }
 }
 

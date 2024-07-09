@@ -3,28 +3,12 @@ import WeatherBase from "./weather_base.ts";
 class HourlyForecast extends WeatherBase {
     public readonly pop: number;
 
-    constructor({
-                    clouds,
-                    dt,
-                    main,
-                    sys,
-                    visibility,
-                    weather,
-                    wind,
-                    pop,
-                    units
-                }: HourlyForecast) {
+    constructor(hr: HourlyForecast & { pop: number }) {
         super({
-            clouds,
-            dt,
-            main,
-            sys,
-            units: units ? units : 'standard',
-            visibility,
-            weather,
-            wind
+            ...hr,
+            units: hr.units ? hr.units : 'standard',
         });
-        this.pop = pop;
+        this.pop = hr.pop;
     }
 
     get dtStr() {
@@ -33,6 +17,10 @@ class HourlyForecast extends WeatherBase {
 
     get timeStr() {
         return WeatherBase.DateToTime(this.dt);
+    }
+
+    get precipitationStr() {
+        return `${this.pop * 100}%`;
     }
 }
 

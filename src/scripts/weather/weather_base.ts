@@ -163,6 +163,18 @@ class WeatherBase {
     get humidityStr(): string {
         return this.main.humidity + '%';
     }
+
+    get dtStr(): string {
+        return WeatherBase.DateStrNormalize(this.dt);
+    }
+
+    get sunriseStr(): string {
+        return WeatherBase.DateToTime(this.sys.sunrise);
+    }
+
+    get sunsetStr(): string {
+        return WeatherBase.DateToTime(this.sys.sunset);
+    }
 }
 
 export default WeatherBase
