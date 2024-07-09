@@ -1,10 +1,10 @@
-import Weather from "../scripts/weather/weather.ts";
 import {useEffect, useState} from "react";
 import WeatherRequests from "../scripts/requests.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../state/store.ts";
 import {useParams} from "react-router-dom";
 import DefaultSpinner from "./DefaultSpinner.tsx";
+import Forecast from "../scripts/weather/forecast.ts";
 
 export default function Home() {
     const lang = useSelector((state: RootState) => state.language.value)
@@ -13,10 +13,10 @@ export default function Home() {
 
     const {city} = useParams()
 
-    const [forecast, setForecast] = useState<Weather | null>(null)
+    const [forecast, setForecast] = useState<Forecast | null>(null)
 
     useEffect(() => {
-        requests.getWeather(city).then(setForecast)
+        requests.getHourlyWeather(city).then(setForecast)
     }, []);
 
     if (!forecast) return <DefaultSpinner/>

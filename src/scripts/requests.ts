@@ -10,7 +10,7 @@ class WeatherRequests {
 
     public static readonly languages = Object.keys(Language)
     public static readonly languageCodes = Object.values(Language);
-    
+
     public lang: Language;
 
     public units: 'standard' | 'metric' | 'imperial'
@@ -23,7 +23,7 @@ class WeatherRequests {
         this.units = units;
     }
 
-    async coords(): Promise<Coords> {
+    public async coords(): Promise<Coords> {
         return await new Promise(resolve => {
             if ('geolocation' in navigator) {
                 navigator.geolocation.getCurrentPosition(
@@ -35,7 +35,7 @@ class WeatherRequests {
                         console.error(error);
                         toast.error("Can't get your location")
                         resolve(WeatherRequests.stdCoords)
-                    }
+                    },
                 );
             } else {
                 toast.error("Geolocation is not supported")
@@ -44,21 +44,30 @@ class WeatherRequests {
         })
     }
 
-    async getWeather(city: string | null = null) {
+    public async getWeather(city: string | null = null) {
         const coords = await this.coords()
         const urlCoords = city ? `q=${city}` : `lat=${coords.lat}&lon=${coords.lon}`
 
-        return (await weatherCommon.get(
-            `weather?${urlCoords}&units=${this.units}&lang=${this.lang}`
+        return (await weatherCommon.get(`weather?${urlCoords}`,
+            {
+                params: {
+                    units: this.units,
+                    lang: this.lang,
+                },
+            },
         )).data as Weather
     }
 
-    async getHourlyWeather(city: string | null = null) {
+    public async getHourlyWeather(city: string | null = null) {
         const coords = await this.coords()
         const urlCoords = city ? `q=${city}` : `lat=${coords.lat}&lon=${coords.lon}`
 
-        return (await weatherCommon.get(
-            `forecast?${urlCoords}&units=${this.units}&lang=${this.lang}`
+        return (await weatherCommon.get(`forecast?${urlCoords}`, {
+                params: {
+                    units: this.units,
+                    lang: this.lang,
+                },
+            },
         )).data as Forecast
     }
 }

@@ -8,8 +8,8 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout/>}>
                 <Route index element={<Home/>}/>
+                <Route path="five-days" element={<Home/>}/>
             </Route>
-
             <Route path="*" element={<NotFound/>}/>
         </Routes>
     )
