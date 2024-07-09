@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+# React Weather App  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description  
 
-Currently, two official plugins are available:
+This React Weather App is a modern, user-friendly application that provides real-time weather information for any location worldwide. By leveraging the OpenWeatherMap API, the app delivers accurate and up-to-date weather data, including current conditions, forecasts, and more.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features  
 
-## Expanding the ESLint configuration
+- **Current Weather**: View current temperature, humidity, wind speed, and weather conditions.  
+- **5-Day Forecast**: Get a 5-day weather forecast for any searched location.  
+- **Location Search**: Search for weather information by city name or ZIP code.  
+- **Responsive Design**: Enjoy a seamless experience on both desktop and mobile devices.  
+- **Unit Conversion**: Toggle between Celsius and Fahrenheit for temperature display.  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used  
 
-- Configure the top-level `parserOptions` property like this:
+- React  
+- OpenWeatherMap API  
+- Axios for API requests  
+- Tailwind for styling  
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation  
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the repository:  
+   ```
+   git clone https://github.com/Narkobaron15/Weather-React.git
+   ```
+2. Navigate to the project directory:  
+   ```
+   cd Weather-React
+   ```
+3. Install dependencies:  
+   ```
+   npm install
+   ```
+4. Create a `.env` file in the root directory and add your OpenWeatherMap API key:  
+   ```
+   API_KEY=<your_api_key_here>
+   ```
+5. Start the development server:  
+   ```
+   npm run dev
+   ```
+
+## Usage  
+
+1. Enter a city name or ZIP code in the search bar.  
+2. Press Enter or click the search button to fetch weather data.  
+3. View the current weather and 5-day forecast for the searched location.  
+4. Toggle between Celsius and Fahrenheit using the unit conversion button.  
+
+## Acknowledgments  
+
+- OpenWeatherMap for providing the weather data API  
+- React community for the excellent documentation and resources  
