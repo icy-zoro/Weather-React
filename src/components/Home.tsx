@@ -1,18 +1,18 @@
-import Weather from "../scripts/weather/weather.ts";
-import {useEffect, useState} from "react";
-import WeatherRequests from "../scripts/requests.ts";
-import {useSelector} from "react-redux";
-import {RootState} from "../state/store.ts";
-import {useSearchParams} from "react-router-dom";
-import DefaultSpinner from "./DefaultSpinner.tsx";
-import Forecast from "../scripts/weather/forecast.ts";
-import MainCard from "./cards/MainCard.tsx";
-import HourlyCards from "./cards/HourlyCards.tsx";
+import Weather from '../scripts/weather/weather.ts'
+import {useEffect, useState} from 'react'
+import WeatherRequestsWorker from '../scripts/requests/worker.ts'
+import {useSelector} from 'react-redux'
+import {RootState} from '../state/store.ts'
+import {useSearchParams} from 'react-router-dom'
+import DefaultSpinner from './DefaultSpinner.tsx'
+import Forecast from '../scripts/forecasts/forecast.ts'
+import MainCard from './cards/MainCard.tsx'
+import HourlyCards from './cards/HourlyCards.tsx'
 
 export default function Home() {
     const lang = useSelector((state: RootState) => state.language.value)
     const units = useSelector((state: RootState) => state.units.value)
-    const requests = new WeatherRequests(lang, units)
+    const requests = new WeatherRequestsWorker(lang, units)
 
     const [searchParams] = useSearchParams()
     const city = searchParams.get('city')
@@ -29,12 +29,12 @@ export default function Home() {
             x.list.forEach((y) => y.units = units)
             setHourlyForecast(x)
         })
-    }, []);
+    }, [])
 
     if (!forecast || !hourlyForecast) return <DefaultSpinner/>
 
     return (
-        <div className="home">
+        <div className='home'>
             <MainCard weather={forecast}/>
             <h2>Hourly forecast</h2>
             <HourlyCards weather={hourlyForecast}/>

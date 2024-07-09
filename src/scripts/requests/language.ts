@@ -1,7 +1,7 @@
 /*
  private static readonly langsMap = new Map([
         
-    ]);
+    ])
  */
 
 enum Language {

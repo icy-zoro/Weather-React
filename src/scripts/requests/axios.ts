@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 
 const weatherCommon = axios.create({
     baseURL: 'https://api.openweathermap.org/data/2.5'

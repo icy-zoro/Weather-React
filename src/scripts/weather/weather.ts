@@ -1,10 +1,10 @@
-import Coords from "../coords.ts";
-import WeatherBase from "./weather_base.ts";
+import Coords from '../coords.ts'
+import WeatherBase from './weather_base.ts'
 
 class Weather extends WeatherBase {
-    public coord: Coords;
-    public timezone: number;
-    public name: string;
+    public coord: Coords
+    public timezone: number
+    public name: string
 
     constructor({
                     clouds,
@@ -28,11 +28,11 @@ class Weather extends WeatherBase {
                 visibility,
                 weather,
                 wind
-            });
+            })
 
-        this.coord = new Coords(coord.lat, coord.lon);
-        this.timezone = timezone;
-        this.name = name;
+        this.coord = new Coords(coord.lat, coord.lon)
+        this.timezone = timezone
+        this.name = name
     }
 }
 

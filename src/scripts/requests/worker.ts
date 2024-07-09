@@ -1,18 +1,18 @@
-import Coords from "./coords.ts";
-import Language from "./requests/language.ts";
-import {toast} from "react-toastify";
-import weatherCommon from "./requests/axios.ts";
-import Weather from "./weather/weather.ts";
-import Forecast from "./weather/forecast.ts";
-import HourlyForecast from "./weather/hourly_forecast.ts";
+import Coords from '../coords.ts'
+import Language from './language.ts'
+import {toast} from 'react-toastify'
+import weatherCommon from './axios.ts'
+import Weather from '../weather/weather.ts'
+import Forecast from '../forecasts/forecast.ts'
+import HourlyForecast from '../forecasts/hourly_forecast.ts'
 
-class WeatherRequests {
-    private static readonly stdCoords = new Coords(49.842957, 24.031111);
+class WeatherRequestsWorker {
+    private static readonly stdCoords = new Coords(49.842957, 24.031111)
 
     public static readonly languages = Object.keys(Language)
-    public static readonly languageCodes = Object.values(Language);
+    public static readonly languageCodes = Object.values(Language)
 
-    public lang: Language;
+    public lang: Language
 
     public units: 'standard' | 'metric' | 'imperial'
 
@@ -20,8 +20,8 @@ class WeatherRequests {
         lang: Language,
         units: 'standard' | 'metric' | 'imperial',
     ) {
-        this.lang = lang;
-        this.units = units;
+        this.lang = lang
+        this.units = units
     }
 
     public async coords(): Promise<Coords> {
@@ -29,18 +29,18 @@ class WeatherRequests {
             if ('geolocation' in navigator) {
                 navigator.geolocation.getCurrentPosition(
                     position => {
-                        const coords = new Coords(position.coords.latitude, position.coords.longitude);
-                        resolve(coords);
+                        const coords = new Coords(position.coords.latitude, position.coords.longitude)
+                        resolve(coords)
                     },
                     error => {
-                        console.error(error);
-                        toast.error("Can't get your location")
-                        resolve(WeatherRequests.stdCoords)
+                        console.error(error)
+                        toast.error(`Can't get your location`)
+                        resolve(WeatherRequestsWorker.stdCoords)
                     },
-                );
+                )
             } else {
-                toast.error("Geolocation is not supported")
-                resolve(WeatherRequests.stdCoords)
+                toast.error('Geolocation is not supported')
+                resolve(WeatherRequestsWorker.stdCoords)
             }
         })
     }
@@ -72,9 +72,9 @@ class WeatherRequests {
 
         return {
             ...forecast,
-            list: forecast.list.map((x: any) => new HourlyForecast(x))
+            list: forecast.list.map((x: HourlyForecast) => new HourlyForecast(x))
         } as Forecast
     }
 }
 
-export default WeatherRequests
+export default WeatherRequestsWorker

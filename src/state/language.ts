@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import Language from "../scripts/requests/language.ts";
+import {createSlice} from '@reduxjs/toolkit'
+import Language from '../scripts/requests/language.ts'
 
 const languageSlice = createSlice({
     name: 'language',

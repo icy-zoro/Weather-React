@@ -1,9 +1,9 @@
-import {configureStore} from "@reduxjs/toolkit"
-import languageReducer from "./language.ts";
-import unitsReducer from "./units.ts";
-import storage from "redux-persist/lib/storage"
-import {persistReducer, persistStore} from "redux-persist";
-import {thunk} from "redux-thunk";
+import {configureStore} from '@reduxjs/toolkit'
+import languageReducer from './language.ts'
+import unitsReducer from './units.ts'
+import storage from 'redux-persist/lib/storage'
+import {persistReducer, persistStore} from 'redux-persist'
+import {thunk} from 'redux-thunk'
 
 const languagePersistConfig = {
     key: 'language',

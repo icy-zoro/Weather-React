@@ -3,6 +3,6 @@ export default class Coords {
     }
 
     static get Empty() {
-        return new Coords(0, 0);
+        return new Coords(0, 0)
     }
 }

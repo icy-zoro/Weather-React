@@ -1,13 +1,13 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit'
 
 const unitsSlice = createSlice({
     name: 'units',
     initialState: {
-        value: "metric" as "standard" | "metric" | "imperial",
+        value: 'metric' as 'standard' | 'metric' | 'imperial',
     },
     reducers: {
         setUnits: (_state, action) => {
-            if (!["standard", "metric", "imperial"].includes(action.payload)) {
+            if (!['standard', 'metric', 'imperial'].includes(action.payload)) {
                 return
             }
             return {value: action.payload}
