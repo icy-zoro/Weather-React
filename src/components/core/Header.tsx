@@ -5,21 +5,7 @@ import {RootState} from '../../state/store.ts'
 import {useDispatch, useSelector} from 'react-redux'
 import {setLanguage} from '../../state/language.ts'
 import {setUnits} from '../../state/units.ts'
-
-const Light = () => {
-    document.documentElement.classList.remove('dark')
-    localStorage.setItem('color-theme', 'light')
-}
-const Dark = () => {
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('color-theme', 'dark')
-}
-
-const handleThemeToggle = () => {
-    const theme = localStorage.getItem('color-theme')
-        ?? ('dark' in document.documentElement.classList ? 'dark' : 'light')
-    theme === 'dark' ? Light() : Dark()
-}
+import { setTheme } from '../../state/theme.ts'
 
 export default function Header() {
     const path = window.location.pathname
@@ -31,7 +17,21 @@ export default function Header() {
 
     const storedLang = useSelector((state: RootState) => state.language.value)
     const storedUnits = useSelector((state: RootState) => state.units.value)
+    const storedTheme = useSelector((state: RootState) => state.theme.value)
     const dispatch = useDispatch()
+
+    const Light = () => {
+        document.documentElement.classList.remove('dark')
+        dispatch(setTheme('light'))
+    }
+    const Dark = () => {
+        document.documentElement.classList.add('dark')
+        dispatch(setTheme('dark'))
+    }
+
+    const handleThemeChange = () => storedTheme === 'dark' ? Light() : Dark()
+
+    storedTheme === 'dark' ? Dark() : Light()
 
     const navigate = useNavigate()
 
@@ -109,7 +109,7 @@ export default function Header() {
                         <li>
                             {/* Dark mode toggle switch */}
                             <button
-                                onClick={handleThemeToggle}
+                                onClick={handleThemeChange}
                                 type='button'
                                 className='theme-switch-btn'>
                                 <svg aria-hidden='true' id='theme-dark-icon' className='w-5 h-5' fill='currentColor'
